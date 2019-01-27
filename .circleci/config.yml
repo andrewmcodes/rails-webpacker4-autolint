@@ -19,11 +19,11 @@ anchors:
           POSTGRES_DB: rails-webpacker4-autolint
           POSTGRES_PASSWORD: ""
 
-  - &bundler
+  - &bundler:
     name: Which bundler?
     command: bundle -v
 
-  - &bundle
+  - &bundle:
     name: Bundle Install
     command: bundle check || bundle install
 
@@ -34,7 +34,7 @@ anchors:
     paths:
     - vendor/bundle
 
-  - &yarn
+  - &yarn:
     name: Yarn Install
     command: yarn install --cache-folder ~/.cache/yarn
 
@@ -48,11 +48,11 @@ anchors:
     paths:
     - ~/.cache/yarn
 
-  - &db_wait
+  - &db_wait:
     name: Wait for DB
     command: dockerize -wait tcp://localhost:5432 -timeout 1m
 
-  - &db_setup
+  - &db_setup:
     name: Database setup
     command: bin/rails db:reset
 
