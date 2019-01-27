@@ -15,6 +15,9 @@
       "yarn format",
       "git add"
     ],
+    "*.{config.js,jsx}}": [
+      "yarn check-eslint"
+    ],
     "*.rb": [
       "bundle exec rubocop -a",
       "git add"
