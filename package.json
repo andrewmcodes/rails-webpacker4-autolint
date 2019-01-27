@@ -1,8 +1,9 @@
 {
   "name": "rails-webpacker4-autolint",
   "scripts": {
-    "lint": "yarn run eslint --ext .js app/frontend",
-    "format": "prettier --write '{*.{config.js,js,jsx,json,css,yaml}}'"
+    "check-eslint": "yarn run eslint --ext .js app/frontend",
+    "check-prettier": "yarn run prettier --check '*.{config.js,js,jsx,json,css,yaml}'",
+    "format": "prettier --write '*.{config.js,js,jsx,json,css,yaml}'"
   },
   "husky": {
     "hooks": {
@@ -10,13 +11,23 @@
     }
   },
   "lint-staged": {
-    "{*.{config.js,js,jsx,json,css,yaml}}": [
+    "*.{config.js,js,jsx,json,css,yaml}": [
       "yarn format",
       "git add"
+    ],
+    "*.{config.js,jsx}}": [
+      "yarn check-eslint"
     ],
     "*.rb": [
       "bundle exec rubocop -a",
       "git add"
+    ],
+    "Gemfile": [
+      "bundle exec rubocop -a",
+      "git add"
+    ],
+    "app/views/*.{haml,html.haml}": [
+      "bundle exec haml-lint app/views"
     ]
   },
   "private": true,
