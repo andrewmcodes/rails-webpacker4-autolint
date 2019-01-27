@@ -2,7 +2,7 @@
   "name": "rails-webpacker4-autolint",
   "scripts": {
     "lint": "yarn run eslint --ext .js app/frontend",
-    "format": "prettier --write '{app/**/*,config/**/*.{js,jsx,json,css,yaml}}'"
+    "format": "prettier --write '{.eslintrc.js,babel.config.js,postcss.config.js,app/**/*,config/**/*.{js,jsx,json,css,yaml}}'"
   },
   "husky": {
     "hooks": {
