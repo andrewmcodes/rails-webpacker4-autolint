@@ -3,7 +3,8 @@
   "scripts": {
     "check-eslint": "yarn run eslint --ext .js app/frontend",
     "check-prettier": "yarn run prettier --check '*.{config.js,js,jsx,json,css,yaml}'",
-    "format": "prettier --write '*.{config.js,js,jsx,json,css,yaml}'"
+    "check-sass": "sass-lint -v",
+    "format-js": "prettier --write '*.{config.js,js,jsx,json,css,yaml}'"
   },
   "husky": {
     "hooks": {
@@ -11,8 +12,8 @@
     }
   },
   "lint-staged": {
-    "*.{config.js,js,jsx,json,css,yaml}": [
-      "yarn format",
+    "*.{config.js,js,jsx,json,sass,yaml}": [
+      "yarn format-js",
       "git add"
     ],
     "*.{config.js,jsx}}": [
@@ -28,6 +29,9 @@
     ],
     "app/views/*.{haml,html.haml}": [
       "bundle exec haml-lint app/views"
+    ],
+    "app/frontend/*.sass": [
+      "yarn sass-lint-auto-fix"
     ]
   },
   "private": true,
@@ -56,6 +60,8 @@
     "husky": "^1.3.1",
     "lint-staged": "^8.1.0",
     "prettier": "^1.16.1",
+    "sass-lint": "^1.12.1",
+    "sass-lint-auto-fix": "^0.15.1",
     "webpack-dev-server": "^3.1.14"
   }
 }

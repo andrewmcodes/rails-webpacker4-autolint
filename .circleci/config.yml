@@ -80,6 +80,10 @@ jobs: # a collection of steps
           name: Run haml-lint
           command: |
             bundle exec haml-lint app/views
+      - run:
+          name: Run sass lint
+          command: |
+            yarn check-sass
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
