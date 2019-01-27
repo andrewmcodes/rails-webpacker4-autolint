@@ -9,11 +9,11 @@ jobs: # a collection of steps
           BUNDLE_RETRY: 3
           BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
-          PGUSER: circleci-demo-ruby
+          PGUSER: ""
           RAILS_ENV: test
       - image: circleci/postgres:9.5-alpine # database image
         environment: # environment variables for database
-          POSTGRES_USER: circleci-demo-ruby
+          POSTGRES_USER: ""
           POSTGRES_DB: rails-webpacker4-autolint
           POSTGRES_PASSWORD: ""
     steps: # a collection of executable commands
@@ -63,7 +63,7 @@ jobs: # a collection of steps
 
       - run:
           name: Database setup
-          command: bin/rails db:schema:load --trace
+          command: bin/rails db:reset
 
       - run:
           name: Run yarn format
