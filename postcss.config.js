@@ -4,7 +4,7 @@ module.exports = {
     require('postcss-flexbugs-fixes'),
     require('postcss-preset-env')({
       autoprefixer: {
-        flexbox: 'no-20090',
+        flexbox: 'no-2009',
       },
       stage: 3,
     }),
