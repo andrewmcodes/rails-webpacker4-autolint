@@ -18,7 +18,7 @@
     "*.{config.js,jsx}}": [
       "yarn check-eslint"
     ],
-    "*.rb": [
+    "*.rb,Gemfile": [
       "bundle exec rubocop -a",
       "git add"
     ],
