@@ -87,8 +87,8 @@ jobs: # a collection of steps
       - restore_cache: *restore_yarn_cache
       - run: *yarn
       - save_cache: *save_yarn_cache
-      - run: *db-wait
-      - run: *db-setup
+      - run: *db_wait
+      - run: *db_setup
       - run: *prettier
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
