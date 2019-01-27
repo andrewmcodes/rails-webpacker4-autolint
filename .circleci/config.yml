@@ -63,8 +63,7 @@ jobs: # a collection of steps
 
       - run:
           name: Database setup
-          command: bin/rails db:schema:load --trace
-
+          command: bin/rails db:reset
       - run:
           name: Run yarn format
           command: |
