@@ -8,6 +8,7 @@
     = stylesheet_packs_with_chunks_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_packs_with_chunks_tag 'application', 'data-turbolinks-track': 'reload'
   %body
-    %p.notice= notice
-    %p.alert= alert
+    %div
+      %p.notice= notice
+      %p.alert= alert
     = yield
