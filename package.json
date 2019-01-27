@@ -21,6 +21,9 @@
     "*.rb": [
       "bundle exec rubocop -a",
       "git add"
+    ],
+    "app/views/*.{haml,html.haml}": [
+      "bundle exec haml-lint app/views"
     ]
   },
   "private": true,
