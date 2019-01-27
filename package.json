@@ -13,6 +13,10 @@
     "{*.{config.js,js,jsx,json,css,yaml}}": [
       "yarn format",
       "git add"
+    ],
+    "*.rb": [
+      "bundle exec rubocop -a",
+      "git add"
     ]
   },
   "private": true,
