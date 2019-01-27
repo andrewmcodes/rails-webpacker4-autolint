@@ -1,0 +1,9 @@
+*.rb
+*.html.haml
+*.text.haml
+*.haml
+.keep
+
+node_modules/*
+test/*
+vendor/*
