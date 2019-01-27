@@ -12,7 +12,7 @@
     }
   },
   "lint-staged": {
-    "*.{config.js,js,jsx,json,sass,yaml}": [
+    "*.{config.js,js,jsx,json,yaml}": [
       "yarn format-js",
       "git add"
     ],

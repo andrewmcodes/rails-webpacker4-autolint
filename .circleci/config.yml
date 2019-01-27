@@ -1,6 +1,8 @@
 version: 2 # use CircleCI 2.0
-jobs: # a collection of steps
-  build: # runs not using Workflows must have a `build` job as entry point
+
+anchors:
+  - &base
+    build: # runs not using Workflows must have a `build` job as entry point
     parallelism: 3 # run three instances of this job in parallel
     docker: # run the steps with Docker
       - image: circleci/ruby:2.6.0-node # ...with this image as the primary container; this is where all `steps` will run
@@ -16,75 +18,148 @@ jobs: # a collection of steps
           POSTGRES_USER: "circleci-demo-ruby"
           POSTGRES_DB: rails-webpacker4-autolint
           POSTGRES_PASSWORD: ""
+
+  - &bundler
+    name: Which bundler?
+    command: bundle -v
+
+  - &bundle
+    name: Bundle Install
+    command: bundle check || bundle install
+
+  - &restore_gem_cache:
+    keys:
+    - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
+    - rails-demo-bundle-v2-
+    paths:
+    - vendor/bundle
+
+  - &yarn
+    name: Yarn Install
+    command: yarn install --cache-folder ~/.cache/yarn
+
+  - &restore_yarn_cache:
+    keys:
+    - rails-demo-yarn-{{ checksum "yarn.lock" }}
+    - rails-demo-yarn-
+
+  - &save_yarn_cache:
+    key: rails-demo-yarn-{{ checksum "yarn.lock" }}
+    paths:
+    - ~/.cache/yarn
+
+  - &db_wait
+    name: Wait for DB
+    command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+  - &db_setup
+    name: Database setup
+    command: bin/rails db:reset
+
+  - &prettier:
+    name: Run prettier
+    command: |
+    yarn check-prettier
+
+  - &eslint:
+    name: Run eslint #for gigs
+    command: |
+    yarn check-eslint
+
+  - &rubocop:
+    name: Run rubocop
+    command: |
+    bundle exec rubocop
+
+  - &haml_lint
+    name: Run haml-lint
+    command: |
+    bundle exec haml-lint app/views
+
+  - &sass_lint:
+    name: Run sass lint
+    command: |
+    yarn check-sass
+
+jobs: # a collection of steps
+  prettier:
+    <<: *base
     steps: # a collection of executable commands
       - checkout # special step to check out source code to working directory
-
-      # Which version of bundler?
-      - run:
-          name: Which bundler?
-          command: bundle -v
-
-      # Restore bundle cache
-      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
-      - restore_cache:
-          keys:
-            - rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - rails-demo-bundle-v2-
-
-      - run: # Install Ruby dependencies
-          name: Bundle Install
-          command: bundle check || bundle install
-
-      # Store bundle cache for Ruby dependencies
-      - save_cache:
-          key: rails-demo-bundle-v2-{{ checksum "Gemfile.lock" }}
-          paths:
-            - vendor/bundle
-
-      # Only necessary if app uses webpacker or yarn in some other way
-      - restore_cache:
-          keys:
-            - rails-demo-yarn-{{ checksum "yarn.lock" }}
-            - rails-demo-yarn-
-
-      - run:
-          name: Yarn Install
-          command: yarn install --cache-folder ~/.cache/yarn
-
-      # Store yarn / webpacker cache
-      - save_cache:
-          key: rails-demo-yarn-{{ checksum "yarn.lock" }}
-          paths:
-            - ~/.cache/yarn
-
-      - run:
-          name: Wait for DB
-          command: dockerize -wait tcp://localhost:5432 -timeout 1m
-
-      - run:
-          name: Database setup
-          command: bin/rails db:reset
-      - run:
-          name: Run prettier
-          command: |
-            yarn check-prettier
-      - run:
-          name: Run eslint #for gigs
-          command: |
-            yarn check-eslint
-      - run:
-          name: Run rubocop
-          command: |
-            bundle exec rubocop
-      - run:
-          name: Run haml-lint
-          command: |
-            bundle exec haml-lint app/views
-      - run:
-          name: Run sass lint
-          command: |
-            yarn check-sass
+      - restore_cache: *restore_gem_cache
+      - run: *bundler
+      - run: *bundle
+      - restore_cache: *restore_yarn_cache
+      - run: *yarn
+      - save_cache: *save_yarn_cache
+      - run: *db-wait
+      - run: *db-setup
+      - run: *prettier
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
       # See https://circleci.com/docs/2.0/deployment-integrations/ for example deploy configs
+
+  eslint:
+    <<: *base
+    steps:
+      - checkout
+      - restore_cache: *restore_gem_cache
+      - run: *bundler
+      - run: *bundle
+      - restore_cache: *restore_yarn_cache
+      - run: *yarn
+      - save_cache: *save_yarn_cache
+      - run: *db-wait
+      - run: *db-setup
+      - run: *eslint
+      - store_test_results:
+        path: test_results
+
+  rubocop:
+    <<: *base
+    steps:
+      - checkout
+      - restore_cache: *restore_gem_cache
+      - run: *bundler
+      - run: *bundle
+      - restore_cache: *restore_yarn_cache
+      - run: *yarn
+      - save_cache: *save_yarn_cache
+      - run: *db-wait
+      - run: *db-setup
+      - run: *rubocop
+      - store_test_results:
+        path: test_results
+
+  haml-lint:
+    <<: *base
+    steps:
+      - checkout
+      - restore_cache: *restore_gem_cache
+      - run: *bundler
+      - run: *bundle
+      - restore_cache: *restore_yarn_cache
+      - run: *yarn
+      - save_cache: *save_yarn_cache
+      - run: *db-wait
+      - run: *db-setup
+      - run: *haml-lint
+      - store_test_results:
+        path: test_results
+
+  sass-lint:
+    <<: *base
+    steps:
+      - checkout
+      - restore_cache: *restore_gem_cache
+      - run: *bundler
+      - run: *bundle
+      - restore_cache: *restore_yarn_cache
+      - run: *yarn
+      - save_cache: *save_yarn_cache
+      - run: *db-wait
+      - run: *db-setup
+      - run: *sass-lint
+      - store_test_results:
+        path: test_results
