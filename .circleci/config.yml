@@ -109,7 +109,7 @@ jobs: # a collection of steps
       - run: *db_setup
       - run: *eslint
       - store_test_results:
-        path: test_results
+          path: test_results
 
   rubocop:
     <<: *base
@@ -125,7 +125,7 @@ jobs: # a collection of steps
       - run: *db_setup
       - run: *rubocop
       - store_test_results:
-        path: test_results
+          path: test_results
 
   haml-lint:
     <<: *base
@@ -141,7 +141,7 @@ jobs: # a collection of steps
       - run: *db_setup
       - run: *haml_lint
       - store_test_results:
-        path: test_results
+          path: test_results
 
   sass-lint:
     <<: *base
@@ -157,7 +157,7 @@ jobs: # a collection of steps
       - run: *db_setup
       - run: *sass_lint
       - store_test_results:
-        path: test_results
+          path: test_results
 
 workflows:
   version: 2
