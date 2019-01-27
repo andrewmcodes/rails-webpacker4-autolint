@@ -58,28 +58,23 @@ anchors:
 
   - &prettier:
     name: Run prettier
-    command: |
-    yarn check-prettier
+    command: yarn check-prettier
 
   - &eslint:
     name: Run eslint #for gigs
-    command: |
-    yarn check-eslint
+    command: yarn check-eslint
 
   - &rubocop:
     name: Run rubocop
-    command: |
-    bundle exec rubocop
+    command: bundle exec rubocop
 
   - &haml_lint
     name: Run haml-lint
-    command: |
-    bundle exec haml-lint app/views
+    command: bundle exec haml-lint app/views
 
   - &sass_lint:
     name: Run sass lint
-    command: |
-    yarn check-sass
+    command: yarn check-sass
 
 jobs: # a collection of steps
   prettier:
