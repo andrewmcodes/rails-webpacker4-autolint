@@ -79,7 +79,7 @@ jobs: # a collection of steps
       - run:
           name: Run haml-lint
           command: |
-            bundle exec haml-lint
+            bundle exec haml-lint app/views
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results
