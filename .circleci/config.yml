@@ -67,7 +67,11 @@ jobs: # a collection of steps
       - run:
           name: Run prettier
           command: |
-            yarn prettier
+            yarn check-prettier
+      - run:
+          name: Run eslint #for gigs
+          command: |
+            yarn check-eslint
       # Save test results for timing analysis
       - store_test_results: # Upload test results for display in Test Summary: https://circleci.com/docs/2.0/collect-test-data/
           path: test_results

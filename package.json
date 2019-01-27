@@ -1,8 +1,8 @@
 {
   "name": "rails-webpacker4-autolint",
   "scripts": {
-    "eslint": "yarn run eslint --ext .js app/frontend",
-    "prettier": "yarn run prettier --check '*.{config.js,js,jsx,json,css,yaml}'",
+    "check-eslint": "yarn run eslint --ext .js app/frontend",
+    "check-prettier": "yarn run prettier --check '*.{config.js,js,jsx,json,css,yaml}'",
     "format": "prettier --write '*.{config.js,js,jsx,json,css,yaml}'"
   },
   "husky": {
