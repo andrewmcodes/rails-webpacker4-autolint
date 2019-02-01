@@ -7,3 +7,4 @@
 // layout file, like app/views/layouts/application.html.erb
 
 console.log('hellooooo');
+console.log('any1 out there??');
