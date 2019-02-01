@@ -81,7 +81,6 @@ jobs:
     <<: *base
     steps:
       - checkout
-      - restore_cache: *restore_gem_cache
       - run: *bundler
       - run: *bundle
       - restore_cache: *restore_yarn_cache
@@ -99,7 +98,6 @@ jobs:
     <<: *base
     steps:
       - checkout
-      - restore_cache: *restore_gem_cache
       - run: *bundler
       - run: *bundle
       - restore_cache: *restore_yarn_cache
@@ -115,7 +113,6 @@ jobs:
     <<: *base
     steps:
       - checkout
-      - restore_cache: *restore_gem_cache
       - run: *bundler
       - run: *bundle
       - restore_cache: *restore_yarn_cache
@@ -131,7 +128,6 @@ jobs:
     <<: *base
     steps:
       - checkout
-      - restore_cache: *restore_gem_cache
       - run: *bundler
       - run: *bundle
       - restore_cache: *restore_yarn_cache
@@ -147,7 +143,6 @@ jobs:
     <<: *base
     steps:
       - checkout
-      - restore_cache: *restore_gem_cache
       - run: *bundler
       - run: *bundle
       - restore_cache: *restore_yarn_cache
