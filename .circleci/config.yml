@@ -158,8 +158,8 @@ workflows:
   version: 2
   build:
     jobs:
-      - prettier
+      # - prettier
       - eslint
       - rubocop
-      - haml-lint
-      - sass-lint
+      # - haml-lint
+      # - sass-lint

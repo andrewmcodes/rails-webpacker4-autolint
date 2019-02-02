@@ -6,11 +6,6 @@
     "check-sass": "sass-lint -v",
     "format-js": "prettier --write '*.{config.js,js,jsx,json,css,yaml}'"
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
   "lint-staged": {
     "*.{config.js,js,jsx,json,yaml}": [
       "yarn format-js",
