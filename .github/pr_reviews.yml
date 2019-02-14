@@ -10,7 +10,6 @@ reviewers:
 addSecondaryReviewers: true
 secondaryReviewers:
   - dvmonroe
-  - jhurd2326
 
 numberOfReviewers: 1
 numberOfSecondaryReviewers: 1
