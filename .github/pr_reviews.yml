@@ -10,6 +10,7 @@ reviewers:
 addSecondaryReviewers: true
 secondaryReviewers:
   - dvmonroe
+  - npezza93
 
 numberOfReviewers: 1
 numberOfSecondaryReviewers: 1
