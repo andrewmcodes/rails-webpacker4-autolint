@@ -7,9 +7,13 @@ reviewers:
   - gmfholley
   - troystauffer
 
-# A number of reviewers added to the pull request
-# Set 0 to add all the reviewers (default: 0)
+addSecondaryReviewers: true
+secondaryReviewers:
+  - dvmonroe
+  - jhurd2326
+
 numberOfReviewers: 1
+numberOfSecondaryReviewers: 1
 
 # A list of keywords to be skipped the process that add reviewers if pull requests include it
 skipKeywords:
