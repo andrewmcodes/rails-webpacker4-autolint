@@ -12,7 +12,7 @@ secondaryReviewers:
   - dvmonroe
   - jhurd2326
 
-numberOfReviewers: 2
+numberOfReviewers: 1
 numberOfSecondaryReviewers: 1
 
 # A list of keywords to be skipped the process that add reviewers if pull requests include it
