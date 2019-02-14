@@ -160,6 +160,6 @@ workflows:
     jobs:
       - prettier
       - eslint
-      - rubocop
+      # - rubocop
       # - haml-lint
       # - sass-lint
